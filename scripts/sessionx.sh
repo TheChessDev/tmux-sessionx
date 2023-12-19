@@ -91,21 +91,21 @@ run_plugin() {
         INPUT="$(additional_input)\n$INPUT"
     fi
     Z_MODE=$(tmux_option_or_fallback "@sessionx-zoxide-mode" "off")
-    BIND_CTRL_SHIFT_X="ctrl-X:execute(tmux kill-session -t {})+reload(tmux list-sessions | sed -E 's/:.*$//' | grep -v $(tmux display-message -p '#S'))"
+    BIND_CTRL_X="ctrl-x:execute(tmux kill-session -t {})+reload(tmux list-sessions | sed -E 's/:.*$//' | grep -v $(tmux display-message -p '#S'))"
     BIND_CTRL_W="ctrl-w:reload(tmux list-windows -a -F '#{session_name}:#{window_index}')+change-preview(${TMUX_PLUGIN_MANAGER_PATH%/}/tmux-sessionx/scripts/preview.sh -w {1})"
     CTRL_X_PATH=$(tmux_option_or_fallback "@sessionx-x-path" "$HOME/.config")
-    BIND_CTRL_X="ctrl-x:reload(find $CTRL_X_PATH -mindepth 1 -maxdepth 1 -type d)+change-preview(ls {})"
+    BIND_CTRL_A="ctrl-a:reload(find $CTRL_X_PATH -mindepth 1 -maxdepth 1 -type d)+change-preview(ls {})"
     BIND_CTRL_E="ctrl-e:reload(find $PWD -mindepth 1 -maxdepth 1 -type d)+change-preview(ls {})"
     BIND_CTRL_T="ctrl-t:change-preview(${TMUX_PLUGIN_MANAGER_PATH%/}/tmux-sessionx/scripts/preview.sh -t {1})"
     BIND_CTRL_B="ctrl-b:reload(echo -e \"${INPUT// /}\")+change-preview(${TMUX_PLUGIN_MANAGER_PATH%/}/tmux-sessionx/scripts/preview.sh {1})"
     BIND_ENTER="enter:replace-query+print-query"
     BIND_CTRL_R='ctrl-r:execute(printf >&2 "New name: ";read name; tmux rename-session -t {} ${name};)+reload(tmux list-sessions | sed -E "s/:.*$//")'
-    HEADER="enter=󰿄  C-X =󱂧  C-r=󰑕  C-x=󱃖  C-w=   C-e=󰇘  C-b=󰌍  C-t=󰐆   C-u=  C-d= "
+    HEADER="enter=󰿄  C-x =󱂧  C-r=󰑕  C-a=󱃖  C-w=   C-e=󰇘  C-b=󰌍  C-t=󰐆   C-u=  C-d= "
 
     RESULT=$(echo -e "${INPUT// /}" | \
         fzf-tmux \
-            --bind "$BIND_CTRL_SHIFT_X" \
             --bind "$BIND_CTRL_X" \
+            --bind "$BIND_CTRL_A" \
             --bind "$BIND_CTRL_E" \
             --bind "$BIND_CTRL_B" \
             --bind "$BIND_CTRL_R" \
