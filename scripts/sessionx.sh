@@ -100,11 +100,11 @@ run_plugin() {
     BIND_CTRL_B="ctrl-b:reload(echo -e \"${INPUT// /}\")+change-preview(${TMUX_PLUGIN_MANAGER_PATH%/}/tmux-sessionx/scripts/preview.sh {1})"
     BIND_ENTER="enter:replace-query+print-query"
     BIND_CTRL_R='ctrl-r:execute(printf >&2 "New name: ";read name; tmux rename-session -t {} ${name};)+reload(tmux list-sessions | sed -E "s/:.*$//")'
-    HEADER="enter=󰿄  C-z =󱂧  C-r=󰑕  C-x=󱃖  C-w=   C-e=󰇘  C-b=󰌍  C-t=󰐆   C-u=  C-d= "
+    HEADER="enter=󰿄  C-X =󱂧  C-r=󰑕  C-x=󱃖  C-w=   C-e=󰇘  C-b=󰌍  C-t=󰐆   C-u=  C-d= "
 
     RESULT=$(echo -e "${INPUT// /}" | \
         fzf-tmux \
-            --bind "$BIND_CTRL_SHIFT_X=" \
+            --bind "$BIND_CTRL_SHIFT_X" \
             --bind "$BIND_CTRL_X" \
             --bind "$BIND_CTRL_E" \
             --bind "$BIND_CTRL_B" \
