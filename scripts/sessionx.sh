@@ -91,7 +91,7 @@ run_plugin() {
         INPUT="$(additional_input)\n$INPUT"
     fi
     Z_MODE=$(tmux_option_or_fallback "@sessionx-zoxide-mode" "off")
-    BIND_CTRL_Z="ctrl-z:execute(tmux kill-session -t {})+reload(tmux list-sessions | sed -E 's/:.*$//' | grep -v $(tmux display-message -p '#S'))"
+    BIND_CTRL_SHIFT_X="ctrl-X:execute(tmux kill-session -t {})+reload(tmux list-sessions | sed -E 's/:.*$//' | grep -v $(tmux display-message -p '#S'))"
     BIND_CTRL_W="ctrl-w:reload(tmux list-windows -a -F '#{session_name}:#{window_index}')+change-preview(${TMUX_PLUGIN_MANAGER_PATH%/}/tmux-sessionx/scripts/preview.sh -w {1})"
     CTRL_X_PATH=$(tmux_option_or_fallback "@sessionx-x-path" "$HOME/.config")
     BIND_CTRL_X="ctrl-x:reload(find $CTRL_X_PATH -mindepth 1 -maxdepth 1 -type d)+change-preview(ls {})"
@@ -104,7 +104,7 @@ run_plugin() {
 
     RESULT=$(echo -e "${INPUT// /}" | \
         fzf-tmux \
-            --bind "$BIND_CTRL_Z" \
+            --bind "$BIND_CTRL_SHIFT_X=" \
             --bind "$BIND_CTRL_X" \
             --bind "$BIND_CTRL_E" \
             --bind "$BIND_CTRL_B" \

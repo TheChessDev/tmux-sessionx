@@ -71,7 +71,7 @@ set -g @sessionx-zoxide-mode 'on'
 Launching the plugin pops up an fzf-tmux "popup" with fizzy search over existing session (-current session).
 If you insert a non-existing name and hit enter, a new session with that name will be created.
 
-- `C-z` will delete the selected session
+- `C-X` will delete the selected session
 - `C-u` scroll preview up
 - `C-d` scroll preview down
 - `C-r` "read": will launch a `read` prompt to rename a session within the list
